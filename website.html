@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Threads | Prayagraj Marketing Agency</title>
+    <style>
+        :root {
+            --gold: #d4af37;
+            --bg: #050505;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+            --dim: #a0a0a0;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background: var(--bg); color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            position: fixed; width: 100%; top: 0; left: 0; z-index: 10000;
+            background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border); height: 70px; display: flex; align-items: center;
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; width: 100%; padding: 0 5%; }
+        .logo { font-weight: 800; color: var(--gold); text-decoration: none; font-size: 1.1rem; letter-spacing: 1px; }
+
+        .nav-links { display: flex; list-style: none; gap: 1.5rem; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--dim); font-size: 0.85rem; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+
+        .header-right { display: flex; align-items: center; gap: 15px; }
+        .work-btn { 
+            background: var(--gold); color: #000; text-decoration: none; padding: 8px 16px; 
+            border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+        }
+
+        /* Fixed Hamburger Menu */
+        .menu-toggle { display: none; cursor: pointer; width: 25px; height: 18px; position: relative; flex-direction: column; justify-content: space-between; }
+        .menu-toggle span { display: block; width: 100%; height: 2px; background: var(--gold); transition: 0.3s; }
+
+        @media (max-width: 992px) {
+            .menu-toggle { display: flex; }
+            .nav-links {
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh;
+                background: #0a0a0a; flex-direction: column; padding-top: 100px;
+                transition: 0.4s ease-in-out; border-left: 1px solid var(--border);
+            }
+            .nav-links.active { right: 0; }
+        }
+
+        /* --- HERO SECTION --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; padding: 80px 5%; gap: 40px; }
+        .carousel-side { flex: 1; display: flex; justify-content: center; perspective: 1000px; }
+        .carousel-3d { width: 160px; height: 220px; position: relative; transform-style: preserve-3d; animation: rotate 20s infinite linear; }
+        .c-item { position: absolute; width: 160px; height: 220px; background: #111; border: 1px solid var(--gold); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 10px; text-align: center; }
+        .c-item h4 { font-size: 0.8rem; color: var(--gold); margin-bottom: 5px; }
+        .c-item p { font-size: 0.6rem; color: var(--dim); }
+        .c-item:nth-child(1) { transform: rotateY(0deg) translateZ(240px); }
+        .c-item:nth-child(2) { transform: rotateY(90deg) translateZ(240px); }
+        .c-item:nth-child(3) { transform: rotateY(180deg) translateZ(240px); }
+        .c-item:nth-child(4) { transform: rotateY(270deg) translateZ(240px); }
+        @keyframes rotate { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+
+        .hero-text { flex: 1.5; }
+        .hero-text h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; margin-bottom: 20px; }
+        .hero-text span { color: var(--gold); }
+        .hero-text p { color: var(--dim); font-size: 1rem; margin-bottom: 30px; line-height: 1.6; }
+
+        /* --- COMMON SECTIONS --- */
+        section { padding: 80px 8%; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.5rem; }
+        .section-title span { color: var(--gold); }
+
+        /* --- GRID SYSTEM --- */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .card { background: var(--card-bg); border: 1px solid var(--border); padding: 30px; border-radius: 15px; transition: 0.3s; }
+        .card:hover { border-color: var(--gold); transform: translateY(-5px); }
+
+        /* Pricing Card Special */
+        .price { font-size: 3rem; font-weight: 800; color: var(--gold); margin: 20px 0; }
+        .card ul { list-style: none; color: var(--dim); font-size: 0.9rem; margin-bottom: 20px; }
+        .card li { margin-bottom: 8px; }
+
+        /* Support/Testimonial Specific */
+        .testimonial-card { font-style: italic; border-left: 3px solid var(--gold); }
+        .client-name { margin-top: 15px; font-weight: bold; color: var(--gold); display: block; font-style: normal; }
+
+        /* --- FOOTER --- */
+        footer { background: #000; padding: 60px 8% 20px; border-top: 1px solid var(--border); display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h4 { color: var(--gold); margin-bottom: 20px; }
+        .footer-col a { display: block; color: var(--dim); text-decoration: none; margin-bottom: 10px; font-size: 0.9rem; }
+        .footer-col a:hover { color: var(--gold); }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; }
+            .carousel-side { order: 2; margin-top: 50px; }
+            .hero-text { order: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="#" class="logo">ELEGANT THREADS</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#testimonials">Reviews</a></li>
+        </ul>
+        <div class="header-right">
+            <a href="#support" class="work-btn">Work With Us</a>
+            <div class="menu-toggle" id="menuToggle">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section id="home" class="hero">
+    <div class="carousel-side">
+        <div class="carousel-3d">
+            <div class="c-item"><h4>Web Dev</h4><p>Leading Company in Prayagraj</p></div>
+            <div class="c-item"><h4>CPA Marketing</h4><p>Cost Per Action Results</p></div>
+            <div class="c-item"><h4>Web Analytics</h4><p>Quantifiable Information</p></div>
+            <div class="c-item"><h4>SEO Pro</h4><p>Organic Site Traffic</p></div>
+        </div>
+    </div>
+    <div class="hero-text">
+        <h1>Top <span>Affiliate Marketing</span> Agency Prayagraj</h1>
+        <p>Transform Your Online Strategy with Our Expert Web Development and Digital Marketing Solutions. High-quality websites that generate meaningful results.</p>
+        <a href="#pricing" class="work-btn" style="padding: 15px 30px;">Choose a Plan</a>
+    </div>
+</section>
+
+<section id="about" style="background: #080808;">
+    <div class="section-title"><h2>About <span>Us</span></h2></div>
+    <div class="grid">
+        <div class="card">
+            <h3>Who We Are?</h3>
+            <p style="color: var(--dim); margin-top:15px;">Established with the goal of empowering businesses to build a robust online presence. We are a team of talented designers, developers, and digital marketing professionals in Prayagraj.</p>
+        </div>
+        <div class="card">
+            <h3>Our Mission</h3>
+            <p style="color: var(--dim); margin-top:15px;">To empower businesses to turn their digital vision into reality. From small startups to large enterprises, we deliver innovation and user-focused results.</p>
+        </div>
+    </div>
+</section>
+
+<section id="features">
+    <div class="section-title"><h2>Powerful <span>Features</span></h2></div>
+    <div class="grid">
+        <div class="card"><h4>Quick Access</h4><p style="color: var(--dim); font-size: 0.85rem; margin-top:10px;">Fast-loading architecture for better user retention and SERP ranking.</p></div>
+        <div class="card"><h4>Easily Manage</h4><p style="color: var(--dim); font-size: 0.85rem; margin-top:10px;">User-friendly dashboards to track your affiliate and site performance.</p></div>
+        <div class="card"><h4>24/7 Support</h4><p style="color: var(--dim); font-size: 0.85rem; margin-top:10px;">Always-on assistance to ensure your online strategy never sleeps.</p></div>
+    </div>
+</section>
+
+<section id="pricing" style="background: #080808;">
+    <div class="section-title"><h2>Best <span>Pricing</span></h2></div>
+    <div class="grid">
+        <div class="card">
+            <h3>Standard</h3><div class="price">$79</div>
+            <ul><li>SERP Analyzer</li><li>Content Editor</li><li>NLP Analysis</li></ul>
+            <a href="#" class="work-btn" style="display:block; text-align:center;">Select Plan</a>
+        </div>
+        <div class="card" style="border-color: var(--gold);">
+            <h3>Professional</h3><div class="price">$179</div>
+            <ul><li>Advanced Analyzer</li><li>Site Explorer</li><li>Priority NLP</li></ul>
+            <a href="#" class="work-btn" style="display:block; text-align:center;">Select Plan</a>
+        </div>
+        <div class="card">
+            <h3>Enterprise</h3><div class="price">$279</div>
+            <ul><li>Full Customization</li><li>Master Explorer</li><li>Unlimited NLP</li></ul>
+            <a href="#" class="work-btn" style="display:block; text-align:center;">Select Plan</a>
+        </div>
+    </div>
+</section>
+
+<section id="testimonials">
+    <div class="section-title"><h2>Client <span>Reviews</span></h2></div>
+    <div class="grid">
+        <div class="card testimonial-card">"The best web development company in Prayagraj. Our site performance increased significantly!"<span class="client-name">- Aman Sharma</span></div>
+        <div class="card testimonial-card">"Elegant Threads' CPA strategies helped our brand reach new heights in the digital market."<span class="client-name">- Priya Singh</span></div>
+    </div>
+</section>
+
+<section id="support" style="background: #080808; text-align: center;">
+    <div class="section-title"><h2>24/7 <span>Support</span></h2><p>Interested in our features? Get in touch with us today.</p></div>
+    <div style="max-width: 500px; margin: 0 auto;">
+        <input type="text" placeholder="Your Name" style="width: 100%; padding: 12px; margin-bottom: 10px; background: #111; border: 1px solid var(--border); color: #fff; border-radius: 5px;">
+        <textarea placeholder="Your Message" rows="4" style="width: 100%; padding: 12px; margin-bottom: 15px; background: #111; border: 1px solid var(--border); color: #fff; border-radius: 5px;"></textarea>
+        <button class="work-btn" style="width: 100%; border: none; cursor: pointer;">Send Request</button>
+    </div>
+</section>
+
+<footer>
+    <div class="footer-col">
+        <h4>Elegant Threads</h4>
+        <p style="color: var(--dim); font-size: 0.9rem;">Empowering businesses to build a robust online presence through innovative design and CPA marketing.</p>
+    </div>
+    <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="#home">Home</a><a href="#about">About us</a><a href="#">Publisher</a><a href="#">Advertiser</a>
+    </div>
+    <div class="footer-col">
+        <h4>Services</h4>
+        <a href="#">Web Analytics</a><a href="#">Social Marketing</a><a href="#">SEO Marketing</a><a href="#">Web Development</a>
+    </div>
+    <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p style="color: var(--dim); font-size: 0.8rem; margin-bottom:10px;">Subscribe for modern updates.</p>
+        <input type="email" placeholder="Email Address" style="width: 100%; padding: 10px; margin-bottom: 10px; background: #111; border: 1px solid #333; color: white;">
+        <button class="work-btn" style="width: 100%; border: none;">Subscribe</button>
+    </div>
+</footer>
+
+<div style="text-align: center; padding: 20px; color: #444; font-size: 0.8rem; border-top: 1px solid #111;">&copy; 2026 Elegant Threads Prayagraj. All Rights Reserved.</div>
+
+<script>
+    // FIXED TOGGLE LOGIC
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.onclick = function() {
+        navLinks.classList.toggle('active');
+        // Simple animation for the lines
+        const spans = menuToggle.querySelectorAll('span');
+        if(navLinks.classList.contains('active')) {
+            spans[0].style.transform = "rotate(45deg) translateY(11px)";
+            spans[1].style.opacity = "0";
+            spans[2].style.transform = "rotate(-45deg) translateY(-11px)";
+        } else {
+            spans[0].style.transform = "none";
+            spans[1].style.opacity = "1";
+            spans[2].style.transform = "none";
+        }
+    }
+
+    // Close menu when link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.onclick = () => {
+            navLinks.classList.remove('active');
+            const spans = menuToggle.querySelectorAll('span');
+            spans[0].style.transform = "none";
+            spans[1].style.opacity = "1";
+            spans[2].style.transform = "none";
+        }
+    });
+</script>
+
+</body>
+</html>
